@@ -86,53 +86,81 @@
     <script>
       function setLoading(loading) {
         if (loading) {
-          $("#submit-button").attr("value", "loading...");
-          $("#submit-button").addClass("disabled");
+          $('#submit-button').attr('value', 'loading...');
+          $('#submit-button').addClass('disabled');
         } else {
-          $("#submit-button").attr("value", "Predict");
-          $("#submit-button").removeClass("disabled");
+          $('#submit-button').attr('value', 'Predict');
+          $('#submit-button').removeClass('disabled');
         }
       }
 
       $(document).ready(function() {
-        var errorMsg = $("#error_msg").html();
-        var successMsg = $("#success_msg").html();
-        const row = $("#container").html();
-        $(document).on("click", ".close-icon", function() {
+        var errorMsg = $('#error_msg').html();
+        var successMsg = $('#success_msg').html();
+        const row = $('#container').html();
+        $(document).on('click', '.close-icon', function() {
           $(this)
             .parent()
             .remove();
         });
 
-        $("#add").click(function() {
-          if ($("#container .form-pair").length < 3) {
-            $("#container").append(row);
+        $('#add').click(function() {
+          if ($('#container .form-pair').length < 3) {
+            $('#container').append(row);
           } else {
-            alert("The limit is only 3 pairs at a time.");
+            alert('The limit is only 3 pairs at a time.');
           }
         });
 
-        $("#remove").click(function() {
-          if ($("#container .form-pair").length > 1)
-            $("#container .form-pair")
+        $('#remove').click(function() {
+          if ($('#container .form-pair').length > 1)
+            $('#container .form-pair')
               .last()
               .remove();
         });
 
-        $("#load-sample").click(function() {
-          $("#container").html(row);
-          $("input[name=strains1]").val("A/NEW_JERSEY/8/1976");
-          $("input[name=strains2]").val("A/BAYERN/69/2009");
-          $("textarea[name=seqs1]").val(
-            "DTLCIGYHANNSTDTVDTVLEKNVTVTHSVNLLEDRHNGKLCKLGGIAPLHLGKCNIAGWLLGNPECELLLTVSSWSYIVETSNSDNGTCYPGDFINYEELREQLSSVSSFERFEIFPKTSSWPDHETNXGVTAACPYAGANSFYRNLIWLVKKGNSYPKLSKSYVNNKGKEVLVLWGIHHPPTSTDQQSLYQNADAYVFVGSSKYNRKFKPEIAARPKVRGQAGRMNYYWTLIEPGDTITFEATGNLVVPRYAFAMNRGSGSGIIISDAPVHDCNTKCQTPKGAINTSLPFQNIHPVTIGECPKYVKSTKLRMATGLRNIPSIQSR"
-          );
-          $("textarea[name=seqs2]").val(
-            "DTLCIGYHANNSTDTVDTVLEKNVTVTHSVNLLEDKHNGKLCKLRGVAPLHLGKCNIAGWILGNPECESLSTASSWSYIVETSSSDNGTCYPGDFIDYEELREQLSSVSSFERFEIFPKTSSWPNHDSNKGVTAACPHAGAKSFYKNLIWLVKKENSYPKLSKSYINDKGKEVLVLWGIHHPSTSADQQSLYQNADAYVFVGSSRYSKKFKPEIAIRPKVRDQEGRMNYYWTLVEPGDKITFEATGNLVVPRYAFAMERNAGSGIIISDTPVHDCNTTCQTPKGAINTSLPFQNIHPITIGKCPKYVKSTKLRLATGLRNVPSIQSR"
-          );
-          $("#sub_type").val("H1N1");
+        $('#load-sample').click(function() {
+          $('#container').html(row);
+          let sub_type = $('#sub_type').val();
+          if (sub_type == 'H1N1') {
+            $('input[name=strains1]').val('A/NEW_JERSEY/8/1976/H1N1');
+            $('input[name=strains2]').val('A/BAYERN/69/2009/H1N1');
+            $('textarea[name=seqs1]').val(
+              'DTLCIGYHANNSTDTVDTVLEKNVTVTHSVNLLEDRHNGKLCKLGGIAPLHLGKCNIAGWLLGNPECELLLTVSSWSYIVETSNSDNGTCYPGDFINYEELREQLSSVSSFERFEIFPKTSSWPDHETNXGVTAACPYAGANSFYRNLIWLVKKGNSYPKLSKSYVNNKGKEVLVLWGIHHPPTSTDQQSLYQNADAYVFVGSSKYNRKFKPEIAARPKVRGQAGRMNYYWTLIEPGDTITFEATGNLVVPRYAFAMNRGSGSGIIISDAPVHDCNTKCQTPKGAINTSLPFQNIHPVTIGECPKYVKSTKLRMATGLRNIPSIQSR',
+            );
+            $('textarea[name=seqs2]').val(
+              'DTLCIGYHANNSTDTVDTVLEKNVTVTHSVNLLEDKHNGKLCKLRGVAPLHLGKCNIAGWILGNPECESLSTASSWSYIVETSSSDNGTCYPGDFIDYEELREQLSSVSSFERFEIFPKTSSWPNHDSNKGVTAACPHAGAKSFYKNLIWLVKKENSYPKLSKSYINDKGKEVLVLWGIHHPSTSADQQSLYQNADAYVFVGSSRYSKKFKPEIAIRPKVRDQEGRMNYYWTLVEPGDKITFEATGNLVVPRYAFAMERNAGSGIIISDTPVHDCNTTCQTPKGAINTSLPFQNIHPITIGKCPKYVKSTKLRLATGLRNVPSIQSR',
+            );
+          } else if (sub_type == 'H3N2') {
+            $('input[name=strains1]').val('A/Salamanca/9/2009/H3N2');
+            $('input[name=strains2]').val(
+              'A/HONG_KONG/4801/2014_MDCK4/MDCK1/H3N2',
+            );
+            $('textarea[name=seqs1]').val(
+              'QKLPGNDNSTATLCLGHHAVPNGTIVKTITNDQIEVTNATELVQSSSTGEICDSPHQILDGENCTLIDALLGDPQCDGFQNKKWDLFVERSKAYSNCYPYDVPDYASLRSLVASSGTLEFNNESFNWTGVTQNGTSSACIRRSNNSFFSRLNWLTHLKFKYPALNVTMPNNEQFDKLYIWGVHHPGTDNDQIFLYAQASGRITVSTKRSQQTVIPNIGSRPRVRNIPSRISIYWTIVKPGDILLINSTGNLIAPRGYFKIRSGKSSIMRSDAPIGKCNSECITPNGSIPNDKPFQNVNRITYGACPRYVKQNTLKLATGMRNVPEKQTR',
+            );
+            $('textarea[name=seqs2]').val(
+              'QKIPGNDNSTATLCLGHHAVPNGTIVKTITNDRIEVTNATELVQNSSIGEICDSPHQILDGENCTLIDALLGDPQCDGFQNKKWDLFVERSKAYSNCYPYDVPDYASLRSLVATSGTLEFNNESFNWTGVTQNGTSSACIRRSSSSFFSRLNWLTHLNYTYPALNVTMPNNEQFDKLYIWGVHHPGTDKDQIFLYAQSSGRITVSTKRSQQAVIPNIGSRPRIRDIPSRISIYWTIVKPGDILLINSTGNLIAPRGYFKIRSGKSSIMRSDAPIGKCKSECITPNGSIPNDKPFQNVNRITYGACPRYVKHSTLKLATGMRNVPEKQTR',
+            );
+          } else if (sub_type == 'H5N1') {
+            $('input[name=strains1]').val(
+              'A/TURKEY/TURKEY/1/2005_NIBRG-23/H5N1',
+            );
+            $('input[name=strains2]').val('A/ANHUI/1/2005_(ANH/1)/H5N1');
+            $('textarea[name=seqs1]').val(
+              'DQICIGYHANNSTEQVDTIMEKNVTVTHAQDILEKTHNGKLCDLDGVKPLILRDCSVAGWLLGNPMCDEFLNVPEWSYIVEKINPANDLCYPGNFNDYEELKHLLSRINHFEKIQIIPKSSWSDHEASAGVSSACPYQGRSSFFRNVVWLIKKDNAYPTIKRSYNNTNQEDLLVLWGIHHPNDAAEQTRLYQNPTTYISVGTSTLNQRLVPKIATRSKVNGQSGRMEFFWTILKPNDAINFESNGNFIAPENAYKIVKKGDSTIMKSELEYGNCNTKCQTPIGAINSSMPFHNIHPLTIGECPKYVKSSRLVLATGLRNS',
+            );
+            $('textarea[name=seqs2]').val(
+              'DQICIGYHANNSTEQVDTIMEKNVTVTHAQDILEKTHNGKLCDLDGVKPLILRDCSVAGWLLGNPMCDEFINVPEWSYIVEKANPANDLCYPGNFNDYEELKHLLSRINHFEKIQIIPKSSWSDHEASSGVSSTCPYQGTPSFFRNVVWLIKKNNTYPTIKRSYNNTNQEDLLILWGIHHSNDAAEQTKLYQNPTTYISVGTSTLNQRLVPKIATKSKVNGQSGKMDFFWTILKPNDAINFESNGNFIAPEYAYKIVKKGDSAIVKSEVEYGNCNTKCQTPIGAINSSMPFHNIHPLTIGECPKYVKSNKLVLATGLRNS',
+            );
+          }
         });
 
-        $("#prediction-form").submit(function(e) {
+        $('#sub_type').change(function() {
+          $('#container').html(row);
+        });
+
+        $('#prediction-form').submit(function(e) {
           e.preventDefault();
 
           setLoading(true);
@@ -142,16 +170,16 @@
           const strains2 = [];
           const seqs1 = [];
           const seqs2 = [];
-          $("input[name=strains1]").each(function() {
+          $('input[name=strains1]').each(function() {
             strains1.push($(this).val());
           });
-          $("input[name=strains2]").each(function() {
+          $('input[name=strains2]').each(function() {
             strains2.push($(this).val());
           });
-          $("textarea[name=seqs1]").each(function() {
+          $('textarea[name=seqs1]').each(function() {
             seqs1.push($(this).val());
           });
-          $("textarea[name=seqs2]").each(function() {
+          $('textarea[name=seqs2]').each(function() {
             seqs2.push($(this).val());
           });
 
@@ -159,36 +187,36 @@
             strains1: strains1,
             strains2: strains2,
             seqs1: seqs1,
-            seqs2: seqs2
+            seqs2: seqs2,
           };
           console.log(data);
-          $(".result-icon").addClass("hide");
+          $('.result-icon').addClass('hide');
           $.ajax({
-            url: $(this).attr("action") + $("#sub_type").val() + "/",
-            type: "post",
+            url: $(this).attr('action') + $('#sub_type').val() + '/',
+            type: 'post',
             data: JSON.stringify(data),
-            contentType: "application/json",
+            contentType: 'application/json',
             success: function(result, status, xhr) {
               console.log(result, status);
               setLoading(false);
               // $(".result-info").show();
-              $("#msg-box").html(successMsg);
+              $('#msg-box').html(successMsg);
               result.forEach(function(each, index) {
                 const key = Object.keys(each)[0];
                 const result = each[key];
                 console.log(result);
                 if (result) {
-                  $(`.result-icon.check:eq(${index})`).removeClass("hide");
+                  $(`.result-icon.check:eq(${index})`).removeClass('hide');
                 } else {
-                  $(`.result-icon.cross:eq(${index})`).removeClass("hide");
+                  $(`.result-icon.cross:eq(${index})`).removeClass('hide');
                 }
               });
             },
             error: function(xhr, status, error) {
-              console.log("error", error);
+              console.log('error', error);
               setLoading(false);
-              $("#msg-box").html(errorMsg);
-            }
+              $('#msg-box').html(errorMsg);
+            },
           });
         });
       });
@@ -221,7 +249,9 @@
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/IAV-CNN_app/instruction/">Instruction</a>
+              <a class="nav-link" href="/IAV-CNN_app/instruction/"
+                >Instruction</a
+              >
             </li>
           </ul>
         </div>
@@ -235,7 +265,22 @@
             <br />
             <h1>IAV-CNN</h1>
             <p>
-              We have proposed a 2D convolutional neural network (CNN) model to infer influenza antigenic variants (IVA-CNN). Specifically, we introduce a new distributed representation of amino acids, named ProtVec that can be applied to a variety of downstream proteomic machine learning tasks. After splittings and embeddings of influenza strains, a 2D squeeze-and-excitation CNN architecture is constructed that enables networks to focus on informative residue features by fusing both spatial and channel-wise information with local receptive fields at each layer. Experimental results on three influenza datasets show IVA-CNN achieves state-of-the-art performance combing the new distributed representation with our proposed architecture. It outperforms both traditional machine algorithms with the same feature representations and the majority of existing models in the independent test data.Therefore we believe that our model can be served as a reliable and robust tool for the prediction of antigenic variants.
+              We have proposed a 2D convolutional neural network (CNN) model to
+              infer influenza antigenic variants (IVA-CNN). Specifically, we
+              introduce a new distributed representation of amino acids, named
+              ProtVec that can be applied to a variety of downstream proteomic
+              machine learning tasks. After splittings and embeddings of
+              influenza strains, a 2D squeeze-and-excitation CNN architecture is
+              constructed that enables networks to focus on informative residue
+              features by fusing both spatial and channel-wise information with
+              local receptive fields at each layer. Experimental results on
+              three influenza datasets show IVA-CNN achieves state-of-the-art
+              performance combing the new distributed representation with our
+              proposed architecture. It outperforms both traditional machine
+              algorithms with the same feature representations and the majority
+              of existing models in the independent test data.Therefore we
+              believe that our model can be served as a reliable and robust tool
+              for the prediction of antigenic variants.
             </p>
           </div>
           <div class="col-md-2"></div>
